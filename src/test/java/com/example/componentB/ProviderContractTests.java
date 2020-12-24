@@ -23,6 +23,7 @@ public class ProviderContractTests {
 
 	public static final String PROVIDER_NAME = "componentB";
 
+	/*
 	@TestTarget
 	public final SpringBootHttpTarget target = new SpringBootHttpTarget();
 
@@ -34,4 +35,5 @@ public class ProviderContractTests {
 		Alligator alligator = new Alligator("Mary");
 		Mockito.when(this.repository.findByName("Mary")).thenReturn(alligator);
 	}
+	*/
 }
