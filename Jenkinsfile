@@ -4,7 +4,7 @@ def integrationEnvTag = 'develop'
 def tags = ['develop', 'preprod', 'prod']
 
 pipeline {
-    agent { any }
+    agent any
 
     stages {
         stage('Setup') {
@@ -31,18 +31,22 @@ pipeline {
         }
 
         stage('Verify contracts') {
-            script {
+            steps {
+                script {
 
-                def consumerTags = tags.join(',')
-                echo 'consumerTags: ' + consumerTags
+                    def consumerTags = tags.join(',')
+                    echo 'consumerTags: ' + consumerTags
 
-                // TODO: override application.properties settings with -Dpactbroker.host=pact-broker, ...
-                sh "./gradlew clean test -Dpact.verifier.publishResults=true -Dpact.provider.tag=${env.BRANCH_NAME} -Dpact.provider.version=${pacticipantVersion} -Dpactbroker.consumerversionselectors.tags=${consumerTags} -Dpactbroker.host=pact-broker"
+                    // TODO: override application.properties settings with -Dpactbroker.host=pact-broker, ...
+                    sh "./gradlew clean test -Dpact.verifier.publishResults=true -Dpact.provider.tag=${env.BRANCH_NAME} -Dpact.provider.version=${pacticipantVersion} -Dpactbroker.consumerversionselectors.tags=${consumerTags} -Dpactbroker.host=pact-broker"
+                }
             }
         }
 
         stage('Can I deploy?') {
-            sh "./pact/bin/pact-broker can-i-deploy --broker-base-url http://pact-broker:9292 --broker-username pact --broker-password password --pacticipant ${pacticipant} --version ${pacticipantVersion} --to ${integrationEnvTag} --retry-interval 30 --retry-while-unknown 10"
+            steps {
+                sh "./pact/bin/pact-broker can-i-deploy --broker-base-url http://pact-broker:9292 --broker-username pact --broker-password password --pacticipant ${pacticipant} --version ${pacticipantVersion} --to ${integrationEnvTag} --retry-interval 30 --retry-while-unknown 10"
+            }
         }
     }
 }

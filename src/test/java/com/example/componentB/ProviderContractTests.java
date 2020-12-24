@@ -14,11 +14,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static com.example.componentB.ProviderContractTests.PROVIDER_NAME;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@RunWith(SpringRestPactRunner.class)
-@Provider(PROVIDER_NAME)
-@PactBroker
-@IgnoreNoPactsToVerify
+// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+// @RunWith(SpringRestPactRunner.class)
+// @Provider(PROVIDER_NAME)
+// @PactBroker
+// @IgnoreNoPactsToVerify
 public class ProviderContractTests {
 
 	public static final String PROVIDER_NAME = "componentB";
