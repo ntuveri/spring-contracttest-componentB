@@ -34,4 +34,9 @@ public class ProviderContractTests {
 		Alligator alligator = new Alligator("Mary");
 		Mockito.when(this.repository.findByName("Mary")).thenReturn(alligator);
 	}
+
+	@State("there is not an alligator named Mary")
+	public void getAlligatorMaryNotFound() {
+		Mockito.when(this.repository.findByName("Mary")).thenReturn(null);
+	}
 }
