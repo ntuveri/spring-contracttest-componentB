@@ -14,16 +14,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static com.example.componentB.ProviderContractTests.PROVIDER_NAME;
 
-// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-// @RunWith(SpringRestPactRunner.class)
-// @Provider(PROVIDER_NAME)
-// @PactBroker
-// @IgnoreNoPactsToVerify
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@RunWith(SpringRestPactRunner.class)
+@Provider(PROVIDER_NAME)
+@PactBroker
+@IgnoreNoPactsToVerify
 public class ProviderContractTests {
 
 	public static final String PROVIDER_NAME = "componentB";
 
-	/*
 	@TestTarget
 	public final SpringBootHttpTarget target = new SpringBootHttpTarget();
 
@@ -35,5 +34,4 @@ public class ProviderContractTests {
 		Alligator alligator = new Alligator("Mary");
 		Mockito.when(this.repository.findByName("Mary")).thenReturn(alligator);
 	}
-	*/
 }
