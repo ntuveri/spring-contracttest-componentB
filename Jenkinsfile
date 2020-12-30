@@ -41,7 +41,7 @@ pipeline {
                         // TODO: override application.properties settings with -Dpactbroker.host=pact-broker, ...
                         sh "./gradlew clean test -Dpact.verifier.publishResults=true -Dpact.provider.tag=${env.BRANCH_NAME} -Dpact.provider.version=${pacticipantVersion} -Dpactbroker.consumerversionselectors.tags=${consumerTags} -Dpactbroker.host=pact-broker"
                     } catch (Exception e) {
-                        echo "Contract verification has failed: " + e.getMessage()
+                        unstable("Contract verification has failed. " + e.getMessage())
                     }
                 }
             }
